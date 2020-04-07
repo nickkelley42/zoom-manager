@@ -1,8 +1,5 @@
 # Config will store secrets, like Zoom API info
-/config.php
-
-# PHP composer packages
-/vendor/
+/config.json
 
 # Mac indexing file:
 .DS_STORE

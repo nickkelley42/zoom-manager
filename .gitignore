@@ -1,5 +1,7 @@
 # Config will store secrets, like Zoom API info
 /config.json
 
+__pycache__
+
 # Mac indexing file:
 .DS_STORE

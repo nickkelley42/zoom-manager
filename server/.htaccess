@@ -1,1 +1,1 @@
-RewriteRule "^api" "/api.py"
+RewriteRule "^api" "/api/main.py"

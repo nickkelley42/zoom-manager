@@ -1,1 +1,2 @@
+RewriteEngine On
 RewriteRule "^api" "/api/main.py"

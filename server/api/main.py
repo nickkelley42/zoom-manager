@@ -4,7 +4,8 @@ from sys import path
 # gives us access to the non-public facing modules
 path.append("../private")
 
-from api import zoom
+import zoom
 
-print("Content-type: text/plain\n")
+print("Content-type: text/plain")
+print("\n\n")
 print("I haven't made this yet. go away.\n")

@@ -22,7 +22,6 @@ npm run build -- --output-path="$out"
 # Add server code
 cd "$root/server"
 cp .htaccess "$out"
-cp main.py "$out"
 cp -r api "$out"
 
 # Put together api config file

@@ -4,4 +4,4 @@ export default class IndexRoute extends Route {
   beforeModel() {
     this.transitionTo("meetings");
   }
-};
+}

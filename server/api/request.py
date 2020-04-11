@@ -1,10 +1,21 @@
 #!/usr/bin/env python3
 
-import cgi
 import json
 
-def send_response(status, data):
-    print("Content-type: application/json")
-    print("Status:{}".format(status))
-    print()
-    print(json.dumps(data))
+class Response:
+    def __init__(self):
+        self.content_type = "application/json"
+        self.headers = []
+        self.data = {}
+        self.status = 200
+
+    def send(self):
+        print("Content-type: {}".format(self.content_type))
+        print("Status:{}".format(self.status))
+        for header in self.headers:
+            print(header)
+        print()
+        print(json.dumps(self.data))
+
+    def add_header(self, header):
+        self.headers.append(header)

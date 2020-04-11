@@ -1,0 +1,15 @@
+<h2>Login</h2>
+<p>
+  <label>
+    Username
+    <Input @value={{this.username}} />
+  </label>
+  </p>
+<p>
+  <label>
+    Password
+    <Input @value={{this.password}} type="password" />
+  </label>
+</p>
+<button {{on "click" this.login}} type="button">Login</button>
+{{outlet}}

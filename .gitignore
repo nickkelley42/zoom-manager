@@ -1,6 +1,5 @@
 # Config will store secrets, like Zoom API info
-/config.json
-/server/api/config.py
+/config.sh
 
 __pycache__
 

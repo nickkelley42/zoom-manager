@@ -18,10 +18,10 @@ fi
 
 # Build the frontend
 cd "$root/client"
-npm install
 npm run build -- --output-path="$out"
 
 # Add server code
 cd "$root/server"
 cp .htaccess "$out"
+cp main.py "$out"
 cp -r api "$out"

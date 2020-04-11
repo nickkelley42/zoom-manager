@@ -32,4 +32,4 @@ echo "zoom_api_key = '$ZOOMAPIKEY'" >> config.py
 echo "zoom_api_secret = '$ZOOMAPISECRET'" >> config.py
 
 # add favicon files if they're not there already
-touch "$out/favicon.ico
+touch "$out/favicon.ico"

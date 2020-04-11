@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'app',
+    modulePrefix: 'zoom-manager',
     environment,
     rootURL: '/',
     locationType: 'auto',

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 root="$(git rev-parse --show-toplevel)"
 out="$root/public"
 
@@ -25,3 +24,10 @@ cd "$root/server"
 cp .htaccess "$out"
 cp main.py "$out"
 cp -r api "$out"
+
+# Put together api config file
+cd "$out/api"
+source "$root/config.sh"
+echo "#!/usr/bin/env python3" > config.py
+echo "zoom_api_key = '$ZOOMAPIKEY'" >> config.py
+echo "zoom_api_secret = '$ZOOMAPISECRET'" >> config.py

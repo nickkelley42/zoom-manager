@@ -4,7 +4,6 @@ from sys import path
 # gives us access to the non-public facing modules
 path.append("../private")
 
-import api.zoom
+from api import zoom, request
 
-print("Content-type: text/plain\n")
-print("I haven't made this yet. go away.\n")
+request.send_response(200, "Not implemented yet")

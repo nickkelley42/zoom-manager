@@ -7,7 +7,7 @@ import config
 from hashlib import sha256
 import database
 import request
-from datetime import now
+from datetime import datetime
 
 def is_authenticated():
     cookie = get_cookie()

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 from sys import path
 # gives us access to the non-public facing modules

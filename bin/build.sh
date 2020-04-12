@@ -17,7 +17,12 @@ fi
 
 # Build the frontend
 cd "$root/client"
-npm run build -- --output-path="$out"
+if [[ $EMBERENV == "" ]]; then
+	EMBEROPTS="$EMBEROPTS"
+else
+	EMBEROPTS="$EMBEROPTS --environment=$EMBERENV"
+fi
+npm run build -- --output-path="$out" $EMBEROPTS
 
 # Add server code
 cd "$root/server"

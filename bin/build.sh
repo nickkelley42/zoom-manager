@@ -22,7 +22,11 @@ if [[ $EMBERENV == "" ]]; then
 else
 	EMBEROPTS="$EMBEROPTS --environment=$EMBERENV"
 fi
-npm run build -- --output-path="$out" $EMBEROPTS
+
+if [[ "$EMBERENV" == "" ]]; then
+	EMBERENV="production"
+fi
+npm run build -- --output-path="$out" --environment=$EMBERENV
 
 # Add server code
 cd "$root/server"

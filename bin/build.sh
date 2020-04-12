@@ -30,6 +30,11 @@ source "$root/config.sh"
 echo "#!/usr/bin/env python3" > config.py
 echo "zoom_api_key = '$ZOOMAPIKEY'" >> config.py
 echo "zoom_api_secret = '$ZOOMAPISECRET'" >> config.py
+echo "db_host = '$DBHOST'" >> config.py
+echo "db_name = '$DBNAME'" >> config.py
+echo "db_user = '$DBUSER'" >> config.py
+echo "db_pass = '$DBPASS'" >> config.py
+echo "db_salt = '$DBSALT'" >> config.py
 
 # add favicon files if they're not there already
 touch "$out/favicon.ico"

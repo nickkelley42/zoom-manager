@@ -11,6 +11,7 @@ class Response:
 
     def send(self):
         print("Content-type: {}".format(self.content_type))
+        print("Cache-Control: no-store")
         print("Status:{}".format(self.status))
         for header in self.headers:
             print(header)

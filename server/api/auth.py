@@ -21,8 +21,8 @@ def login():
     response = request.Response()
 
     # placeholders, so the script runs, but always fails
-    username = ""
-    password = ""
+    username = "larry"
+    password = "internetcall"
 
     user = database.get_user(username)
     if not user:

@@ -11,7 +11,7 @@ def get_user(username):
 def new_session(user_id, session_id):
     query = ("INSERT INTO sessions (user_id, id)"
              "VALUES (%s, %s)")
-    result = make_query(j)
+    result = make_query()
     return result
 
 def get_session(session_id):

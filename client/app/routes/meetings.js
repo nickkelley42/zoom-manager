@@ -1,10 +1,15 @@
 import Route from '@ember/routing/route';
 
 export default class MeetingsRoute extends Route {
-  model() {
-    return this.store.findAll("meeting")
-      .catch(() => {
+  beforeModel() {
+    return fetch("/api/auth-test").then(r => r.text()).then(t => {
+      if (t !== "Logged in") {
         this.transitionTo("login");
-      });
+      }
+    });
+  }
+
+  model() {
+    return this.store.findAll("meeting");
   }
 }

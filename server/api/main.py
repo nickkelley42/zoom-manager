@@ -12,7 +12,8 @@ from os import environ
 response = request.Response()
 
 unauth_routes = {
-    "^/api/login/?$": auth.login
+    "^/api/login/?$": auth.login,
+    "^/api/auth-test/?$": auth.auth_test,
 }
 
 auth_routes = {}

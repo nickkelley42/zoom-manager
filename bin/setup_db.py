@@ -44,5 +44,6 @@ create_first_user_query = """
 """
 
 cur.execute(create_first_user_query, (new_user, hashed_pass))
+cnx.commit()
 
 cnx.close()

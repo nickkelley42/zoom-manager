@@ -16,7 +16,15 @@ def is_authenticated():
         return False
     session_id = cookie["session"].value
     session = database.get_session(session_id)
-    return len(session) > 0
+    return session is not None
+
+def auth_test():
+    response = request.Response()
+    if is_authenticated():
+        response.data = "Logged in"
+    else:
+        response.data = "Not logged in"
+    response.send()
 
 def login():
     response = request.Response()
@@ -40,14 +48,15 @@ def login():
         login_failure(response, "wrong password")
         return
 
-    new_session_id = hash(str(datetime.now()) + username)
-    try:
-        session = database.new_session(new_session_id)
-        set_cookie(response, "session", session)
-        response.data = "success"
-        response.send()
-    except:
-        login_failure(response, "exception in session creation")
+    new_session(response, user)
+
+def new_session(response, user, message="success"):
+    new_session_id = hash(str(datetime.now()) + user["username"])
+    session = database.new_session(user["id"], new_session_id)
+    set_cookie(response, "session", new_session_id)
+    response.data = message
+    response.send()
+    
 
 def login_failure(response, message="failure"):
     response.status = 401

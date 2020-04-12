@@ -35,6 +35,8 @@ def make_query(query, params=()):
         result = None
     else:
         result = dict(zip(keys, vals))
+
+    cnx.commit()
     cursor.close()
     cnx.close()
     return result

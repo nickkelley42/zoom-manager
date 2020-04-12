@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import json
+import database
 
 class Response:
     def __init__(self):
@@ -17,6 +18,7 @@ class Response:
             print(header)
         print()
         print(json.dumps(self.data))
+        database.session_cleanup()
 
     def add_header(self, header):
         self.headers.append(header)

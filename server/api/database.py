@@ -2,6 +2,7 @@
 
 import mysql.connector
 import config
+import datetime
 
 def get_user(username):
     query = "SELECT * FROM `users` WHERE `username`=%s"
@@ -9,15 +10,24 @@ def get_user(username):
     return result
 
 def new_session(user_id, session_id):
-    query = ("INSERT INTO sessions (user_id, id)"
-             "VALUES (%s, %s)")
-    result = make_query(query, (user_id, session_id))
+    query = ("INSERT INTO sessions (created_at, user_id, id)"
+             "VALUES (%s, %s, %s)")
+    now = datetime.datetime.now()
+    result = make_query(query, (now, user_id, session_id))
     return result
 
 def get_session(session_id):
     query = "SELECT id, user_id, created_at FROM sessions WHERE id=%s"
     result = make_query(query, (session_id,))
     return result
+
+def session_cleanup():
+    query = """
+        DELETE FROM sessions
+        WHERE created_at IS NULL OR created_at < %s
+    """
+    cutoff = datetime.datetime.now() - datetime.timedelta(hours = 1)
+    make_query(query, (cutoff,))
 
 def make_query(query, params=()):
     db_user = config.db_user
@@ -40,3 +50,4 @@ def make_query(query, params=()):
     cursor.close()
     cnx.close()
     return result
+

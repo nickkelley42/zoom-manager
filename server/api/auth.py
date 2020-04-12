@@ -8,6 +8,7 @@ from hashlib import sha256
 import database
 import request
 from datetime import datetime
+import forms
 
 def is_authenticated():
     cookie = get_cookie()
@@ -20,20 +21,23 @@ def is_authenticated():
 def login():
     response = request.Response()
 
-    # placeholders, so the script runs, but always fails
-    username = "larry"
-    password = "internetcall"
+    data = forms.get_form_data()
+    if "username" not in data or "password" not in data:
+        login_failure(response, "bad form data")
+
+    username = data["username"]
+    password = data["password"]
 
     user = database.get_user(username)
     if not user:
-        login_failure(response)
+        login_failure(response, "no matching user")
         return
 
     correct = user["password"]
     check = hash(password)
 
     if not check == correct:
-        login_failure(response)
+        login_failure(response, "wrong password")
         return
 
     new_session_id = hash(str(datetime.now()) + username)
@@ -43,11 +47,11 @@ def login():
         response.data = "success"
         response.send()
     except:
-        login_failure(response)
+        login_failure(response, "exception in session creation")
 
-def login_failure(response):
+def login_failure(response, message="failure"):
     response.status = 401
-    response.data = "failure"
+    response.data = message
     response.send()
 
 def get_cookie():
@@ -63,9 +67,6 @@ def set_cookie(response, name, value):
     response.add_header(cookie)
 
 def hash(text):
-    salted = config.salt + text
+    salted = config.db_salt + text
     return sha256(salted.encode("utf-8")).hexdigest()
 
-def salt(text):
-    salt = config.salt
-    return salt + text

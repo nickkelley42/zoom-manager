@@ -24,7 +24,7 @@ def login():
     username = ""
     password = ""
 
-    user = database.find_user(username)
+    user = database.get_user(username)
     if not user:
         login_failure(response)
         return

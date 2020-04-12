@@ -7,9 +7,15 @@ import config
 from hashlib import sha256
 import database
 import request
+from datetime import now
 
 def is_authenticated():
-    return False
+    cookie = get_cookie()
+    if "session" not in cookie:
+        return False
+    session_id = cookie["session"].value
+    session = database.get_session(session_id)
+    return len(session) > 0
 
 def login():
     response = request.Response()
@@ -30,10 +36,14 @@ def login():
         login_failure(response)
         return
 
-    session = database.new_session()
-    set_cookie(response, "session", session)
-    response.data = "success"
-    response.send()
+    new_session_id = hash(str(datetime.now()) + username)
+    try:
+        session = database.new_session(new_session_id)
+        set_cookie(response, "session", session)
+        response.data = "success"
+        response.send()
+    except:
+        login_failure(response)
 
 def login_failure(response):
     response.status = 401

@@ -4,9 +4,17 @@ import mysql.connector
 import config
 import datetime
 
-def get_user(username):
+def get_user_by_name(name):
     query = "SELECT * FROM `users` WHERE `username`=%s"
-    result = make_query(query, (username,))
+    return make_query(query, (name,))
+
+def get_user_by_id(user_id):
+    query = "SELECT * FROM `users` WHERE `id`=%s"
+    return make_query(query, (user_id,))
+
+def update_password(user_id, password):
+    query = "UPDATE users SET password = %s WHERE id = %s"
+    result = make_query(query, (password, user_id))
     return result
 
 def new_session(user_id, session_id):

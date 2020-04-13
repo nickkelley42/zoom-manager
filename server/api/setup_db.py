@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import mysql.connector
-from os import environ
 from hashlib import sha256
+import config
 
 create_users_table_query = """
     CREATE TABLE users (
@@ -22,10 +22,10 @@ create_sessions_table_query = """
     )
 """
 
-db_host = environ["DBHOST"]
-db_name = environ["DBNAME"]
-db_user = environ["DBUSER"]
-db_pass = environ["DBPASS"]
+db_host = config.db_host
+db_name = config.db_name
+db_user = config.db_user
+db_pass = config.db_pass
 cnx = mysql.connector.connect(user=db_user, database=db_name,
                               host=db_host, password=db_pass)
 
@@ -33,10 +33,11 @@ cur = cnx.cursor(buffered=True)
 cur.execute(create_users_table_query)
 cur.execute(create_sessions_table_query)
 
-db_salt = environ["DBSALT"]
+db_salt = config.db_salt
 new_user = "larry"
 tmp_pass = "internetcall"
-hashed_pass = sha256((db_salt + tmp_pass).encode("utf-8")).hexdigest()
+salted = db_salt + tmp_pass
+hashed_pass = sha256(salted.encode("utf-8")).hexdigest()
 
 create_first_user_query = """
     INSERT INTO users (username, password)

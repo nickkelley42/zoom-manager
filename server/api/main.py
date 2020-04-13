@@ -16,7 +16,9 @@ unauth_routes = {
     "^/api/auth-test/?$": auth.auth_test,
 }
 
-auth_routes = {}
+auth_routes = {
+    "^/api/update-pass/?$": auth.change_password,
+}
 
 def find_handler(routes, url):
     for route, handler in routes.items():

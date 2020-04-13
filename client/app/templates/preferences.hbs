@@ -4,7 +4,7 @@
   <div class="flash">
     {{this.message}}
   </div>
-  <form {{on "submit" this.changePass}}>
+  <form>
     <p>
       <label>
         Current Password<br />
@@ -24,7 +24,9 @@
       </label>
     </p>
     <p>
-      <button type="submit">Change Password</button>
+      <button type="button" {{on "click" this.changePass}}>
+        Change Password
+      </button>
     </p>
   </form>
 </section>

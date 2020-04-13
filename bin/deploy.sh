@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 root="$(git rev-parse --show-toplevel)"
 
 "$root/bin/build.sh"

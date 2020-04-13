@@ -1,1 +1,31 @@
+<h2>User Preferences</h2>
+<section class="changepass">
+  <h3>Change Password</h3>
+  <div class="flash">
+    {{this.message}}
+  </div>
+  <form {{on "submit" this.changePass}}>
+    <p>
+      <label>
+        Current Password<br />
+        <Input @value={{this.currentPass}} type="password" />
+      </label>
+    </p>
+    <p>
+      <label>
+        New Password<br />
+        <Input @value={{this.newPass}} type="password" />
+      </label>
+    </p>
+    <p>
+      <label>
+        New Password Again<br />
+        <Input @value={{this.newPassAgain}} type="password" />
+      </label>
+    </p>
+    <p>
+      <button type="submit">Change Password</button>
+    </p>
+  </form>
+</section>
 {{outlet}}

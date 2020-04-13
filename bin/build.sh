@@ -17,12 +17,6 @@ fi
 
 # Build the frontend
 cd "$root/client"
-if [[ $EMBERENV == "" ]]; then
-	EMBEROPTS="$EMBEROPTS"
-else
-	EMBEROPTS="$EMBEROPTS --environment=$EMBERENV"
-fi
-
 if [[ "$EMBERENV" == "" ]]; then
 	EMBERENV="production"
 fi

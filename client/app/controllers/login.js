@@ -15,15 +15,15 @@ export default class LoginController extends Controller {
         username: this.username,
         password: this.password,
       }),
-    }).then(response => response.text()).then(text => {
-      if (text === "success") {
+    }).then(response => response.json()).then(stuff => {
+      if (stuff === "success") {
         this.set("message", null);
         if (this.get("previousTransition")) {
           let pt = this.get("previousTransition");
           this.set("previousTransition", null);
           pt.retry();
         } else {
-          this.transitionTo("meetings");
+          this.transitionToRoute("meetings");
         }
       } else {
         this.set("message", "Incorrect username/password");

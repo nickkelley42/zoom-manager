@@ -6,6 +6,14 @@ export default class PreferencesController extends Controller {
   newPass = "";
   newPassAgain = "";
 
+  clearPass() {
+    this.setProperties({
+      "currentPass": "",
+      "newPass": "",
+      "newPassAgain": "",
+    });
+  }
+
   @action changePass() {
     const cp = this.currentPass;
     const np = this.newPass;
@@ -29,6 +37,7 @@ export default class PreferencesController extends Controller {
     }).then(r => r.json()).then(stuff => {
       if (stuff === "success") {
         this.set("message", "Updated successfully");
+        this.clearPass();
       } else {
         this.set("message", "Updating failed");
       }

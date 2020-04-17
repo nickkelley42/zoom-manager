@@ -51,6 +51,8 @@ Required configuration fields (case-sensitive):
 * `DBUSER` - The database username
 * `DBPASS` - The database password
 
+# Deployment
+
 Once your files are in place:
 
 1. Deploy by running the `bin/deploy.sh` script.

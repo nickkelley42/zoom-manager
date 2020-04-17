@@ -51,7 +51,7 @@ Required configuration fields (case-sensitive):
 * `DBUSER` - The database username
 * `DBPASS` - The database password
 
-# Deployment
+### Deployment
 
 Once your files are in place:
 

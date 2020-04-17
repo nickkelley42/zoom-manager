@@ -27,14 +27,14 @@ def login():
 
     data = forms.get_form_data()
     if "username" not in data or "password" not in data:
-        login_failure(response, "bad form data")
+        login_failure(response)
 
     username = data["username"]
     password = data["password"]
 
     user = database.get_user_by_name(username)
     if not user:
-        login_failure(response, "no matching user")
+        login_failure(response)
         return
 
     known = user["password"]
@@ -43,7 +43,7 @@ def login():
     success = hashing.check_hash(password, salt, known)
 
     if not success:
-        login_failure(response, "wrong password")
+        login_failure(response)
         return
 
     new_session(response, user)
@@ -72,7 +72,7 @@ def change_password():
     response = request.Response()
     data = forms.get_form_data()
     if "old" not in data or "new" not in data:
-        login_failure(response, "old or new is undefined")
+        login_failure(response)
         return
     
     session = get_session()
@@ -81,11 +81,11 @@ def change_password():
 
     current = user["password"]
     salt = user["salt"]
-    maybe_curr = data["old"]
+    maybe = data["old"]
     correct_pw = hashing.check_hash(maybe, salt, current)
 
     if not correct_pw:
-        login_failure(response, data["old"])
+        login_failure(response)
         return
 
     hash_data = hashing.generate_hash(new)

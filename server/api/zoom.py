@@ -6,6 +6,18 @@ import datetime
 import http.client
 import json
 
+def get_meetings():
+    uid = _get_uid()
+    url = '/users/{}/meetings'.format(uid)
+    data = _zoom_api_request(url)
+    return data['meetings']
+
+def _get_uid():
+    url = '/users?status=active'
+    data = _zoom_api_request(url)
+    user = data['users'][0]
+    return user['id']
+
 def _get_jwt():
     return jwt.encode(
         {
@@ -23,11 +35,12 @@ def _expiration():
 def _zoom_api_request(url):
     con = http.client.HTTPSConnection('api.zoom.us')
 
+    prefixed = '/v2' + url
     headers = {
         'authorization': 'Bearer {}'.format(_get_jwt()),
         'content-type': 'application/json'
     }
-    con.request('GET', url, headers=headers)
+    con.request('GET', prefixed, headers=headers)
 
     res = con.getresponse()
     data = res.read()

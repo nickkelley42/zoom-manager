@@ -6,6 +6,7 @@ path.append("../private")
 
 import request
 import auth
+import meetings
 import re
 from os import environ
 
@@ -18,6 +19,7 @@ unauth_routes = {
 
 auth_routes = {
     "^/api/update-pass/?$": auth.change_password,
+    "^/api/meetings": meetings.get_all_meetings,
 }
 
 def find_handler(routes, url):

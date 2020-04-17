@@ -1,6 +1,8 @@
 <h2>Meetings</h2>
-{{#each this.model}}
-{{else}}
-  <p>No meetings scheduled</p>
-{{/each}}
-{{outlet}}
+<ul>
+  {{#each this.model as |meeting|}}
+    <li>{{meeting.topic}}</li>
+  {{else}}
+    <p>No meetings scheduled</p>
+  {{/each}}
+</ul>

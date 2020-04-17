@@ -88,7 +88,7 @@ def change_password():
         login_failure(response)
         return
 
-    hash_data = hashing.generate_hash(new)
+    hash_data = hashing.generate_hash(data["new"])
     database.update_password(user_id, hash_data)
 
     response.data = "success"

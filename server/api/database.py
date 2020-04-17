@@ -20,7 +20,7 @@ def update_password(user_id, hash_data):
         SET password = %s, salt = %s
         WHERE id = %s
     """
-    result = make_query(query, (password, salt, user_id))
+    result = make_query(query, (pw, salt, user_id))
     return result
 
 def new_session(user_id, session_id):

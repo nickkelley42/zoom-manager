@@ -13,7 +13,7 @@ def generate_hash(password):
     return { 'key': key, 'salt': salt }
 
 def generate_salt():
-    return os.urandom(32)
+    return os.urandom(64)
 
 def hashalg(password, salt):
     return hashlib.pbkdf2_hmac(
@@ -22,4 +22,5 @@ def hashalg(password, salt):
         salt,
         100000
     )
-
+def new_session_id():
+    return os.urandom(64).hex()

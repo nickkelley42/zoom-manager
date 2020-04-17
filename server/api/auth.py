@@ -4,11 +4,11 @@ from os import environ
 from http import cookies
 import datetime
 import config
-from hashlib import sha256
 import database
 import request
 from datetime import datetime
 import forms
+from lib import hashing
 
 def is_authenticated():
     session = get_session()
@@ -37,17 +37,19 @@ def login():
         login_failure(response, "no matching user")
         return
 
-    correct = user["password"]
-    check = hash(password)
+    known = user["password"]
+    salt = user["salt"]
+    password = data["password"]
+    success = hashing.check_hash(password, salt, known)
 
-    if not check == correct:
+    if not success:
         login_failure(response, "wrong password")
         return
 
     new_session(response, user)
 
 def new_session(response, user, message="success"):
-    new_session_id = hash(str(datetime.now()) + user["username"])
+    new_session_id = hashing.new_session_id()
     session = database.new_session(user["id"], new_session_id)
     set_cookie(response, "session", new_session_id)
     response.data = message
@@ -76,15 +78,18 @@ def change_password():
     session = get_session()
     user_id = session["user_id"]
     user = database.get_user_by_id(user_id)
-    old_pw = user["password"]
-    old_pw_check = hash(data["old"])
 
-    if old_pw != old_pw_check:
+    current = user["password"]
+    salt = user["salt"]
+    maybe_curr = data["old"]
+    correct_pw = hashing.check_hash(maybe, salt, current)
+
+    if not correct_pw:
         login_failure(response, data["old"])
         return
 
-    new_pw = hash(data["new"])
-    database.update_password(user_id, new_pw)
+    hash_data = hashing.generate_hash(new)
+    database.update_password(user_id, hash_data)
 
     response.data = "success"
     response.send()
@@ -100,8 +105,4 @@ def set_cookie(response, name, value):
     cookie[name] = value
     cookie[name]["secure"] = True
     response.add_header(cookie)
-
-def hash(text):
-    salted = config.db_salt + text
-    return sha256(salted.encode("utf-8")).hexdigest()
 

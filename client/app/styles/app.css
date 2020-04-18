@@ -1,0 +1,13 @@
+table {
+  margin-top: 1em;
+}
+
+table th,
+table td {
+  padding: 0.5em 1em 0.5em 0;
+  text-align: left;
+}
+
+table .center {
+  text-align: center;
+}

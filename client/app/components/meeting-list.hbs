@@ -1,7 +1,7 @@
 <table>
   <thead>
     <th>Time</th>
-    <th>Duration</th>
+    <th class="center">Duration</th>
     <th>Topic</th>
     <th>Join Link</th>
   </thead>
@@ -9,7 +9,7 @@
     {{#each @meetings as |meeting|}}
       <tr>
         <td>{{datetime meeting.start_time}}</td>
-        <td>{{meeting.duration}}</td>
+        <td class="center">{{meeting.duration}}</td>
         <td>{{meeting.topic}}</td>
         <td><a href={{meeting.join_url}}>{{meeting.join_url}}</a></td>
       </tr>

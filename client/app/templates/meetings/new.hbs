@@ -1,2 +1,6 @@
 <h2>New Meeting</h2>
-<MeetingForm @meeting={{@model}} @submit={{this.submit}}/>
+{{#if this.sending}}
+  <p>{{this.message}}</p>
+{{else}}
+  <MeetingForm @meeting={{@model}} @submit={{this.submit}}/>
+{{/if}}

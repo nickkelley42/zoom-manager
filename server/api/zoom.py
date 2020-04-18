@@ -24,7 +24,11 @@ def create_meeting(topic, start_string, pw=None):
     
     data = {
         'topic': topic,
-        'start_time': start_string
+        'start_time': start_string,
+        'duration': 60,
+        'settings': {
+            'join_before_host': True,
+        }
     }
     if pw is not None:
         data['password'] = pw

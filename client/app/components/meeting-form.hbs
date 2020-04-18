@@ -1,0 +1,19 @@
+<form>
+  <p><label>
+    Topic:<br />
+    <Input @value={{@meeting.topic}} />
+  </label></p>
+  <p><label>
+    Date/Time:<br />
+    <EmberFlatpickr
+      date={{@meeting.start_time}}
+      @onChange={{this.updateDate}}
+      @enableTime={{true}}
+    />
+  </label></p>
+  <p>
+    <button type="button" {{on "click" this.submit}}>
+      Schedule Meeting
+    </button>
+  </p>
+</form>

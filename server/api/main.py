@@ -19,7 +19,7 @@ unauth_routes = {
 
 auth_routes = {
     "^/api/update-pass/?$": auth.change_password,
-    "^/api/meetings": meetings.get_all_meetings,
+    "^/api/meetings": meetings.meetings_actions,
 }
 
 def find_handler(routes, url):

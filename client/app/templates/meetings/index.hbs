@@ -1,8 +1,9 @@
 <h2>Meetings</h2>
-<ul>
-  {{#each this.model as |meeting|}}
-    <li>{{meeting.topic}}</li>
-  {{else}}
-    <p>No meetings scheduled</p>
-  {{/each}}
-</ul>
+<LinkTo @route='meetings.new'>
+  Schedule Meeting
+</LinkTo>
+{{#if this.hasMeetings}}
+  <MeetingList @meetings={{@model}} />
+{{else}}
+  <p>No meetings scheduled</p>
+{{/if}}

@@ -28,6 +28,7 @@ def login():
     data = forms.get_form_data()
     if "username" not in data or "password" not in data:
         login_failure(response)
+        return
 
     username = data["username"]
     password = data["password"]

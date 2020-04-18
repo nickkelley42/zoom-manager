@@ -25,6 +25,7 @@ def create_meeting(topic, start_string, pw=None):
     data = {
         'topic': topic,
         'start_time': start_string,
+        'timezone': 'UTC',
         'duration': 60,
         'settings': {
             'join_before_host': True,

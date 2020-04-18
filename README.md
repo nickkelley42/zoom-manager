@@ -2,7 +2,6 @@
 
 A webapp to let multiple users manage meetings on a single Zoom account.
 
-
 ## Setup
 
 You will need a build environment and a server. The build environment 
@@ -65,9 +64,3 @@ hook.
 The backend is written in Python, and sends JSON responses to the 
 frontend.
 
-### To-do
-
-* Connect backend to Zoom API
-* View meetings schedule
-* Create new meeting
-* Get meeting link - open from app

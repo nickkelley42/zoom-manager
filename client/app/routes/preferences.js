@@ -1,6 +1,6 @@
-import AuthOnlyRoute from "./auth-only-route";
+import Route from '@ember/routing/route';
 
-export default class PreferencesRoute extends AuthOnlyRoute {
+export default class PreferencesRoute extends Route {
   model() {
     return {};
   }

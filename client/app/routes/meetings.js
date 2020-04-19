@@ -1,4 +1,4 @@
-import AuthOnlyRoute from "./auth-only-route";
+import Route from '@ember/routing/route';
 
-export default class MeetingsRoute extends AuthOnlyRoute {
+export default class MeetingsRoute extends Route {
 }

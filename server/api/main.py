@@ -31,7 +31,9 @@ def find_handler(routes, url):
 url = environ["REQUEST_URI"]
 handler = False
 
-if auth.is_authenticated():
+authenticated = auth.is_authenticated()
+
+if authenticated:
     handler = find_handler(auth_routes, url)
 if not handler:
     handler = find_handler(unauth_routes, url)
@@ -40,6 +42,11 @@ if handler:
     handler()
 else:
     response = request.Response()
-    response.status = 400
-    response.data = "Bad request"
+    if authenticated:
+        response.status = 404
+        response.data = "not found"
+    else:
+        response.status = 403
+        response.data = "not logged in"
+
     response.send()

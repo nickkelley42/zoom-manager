@@ -7,8 +7,10 @@ export default class MeetingsNewRoute extends Route {
   }
 
   @action willTransition() {
-    let ctl = this.controller;
-    ctl.model.deleteRecord();
+    let model = this.controller.model;
+    if (model.isNew) {
+      model.unloadRecord();
+    }
     return true;
   }
 }

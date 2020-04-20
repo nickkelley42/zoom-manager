@@ -18,7 +18,6 @@ class Response:
             print(header)
         print()
         print(json.dumps(self.data))
-        database.session_cleanup()
 
     def add_header(self, header):
         self.headers.append(header)

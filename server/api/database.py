@@ -31,6 +31,7 @@ def new_session(user_id, session_id):
     return result
 
 def get_session(session_id):
+    session_cleanup()
     query = "SELECT id, user_id, created_at FROM sessions WHERE id=%s"
     result = make_query(query, (session_id,))
     return result
